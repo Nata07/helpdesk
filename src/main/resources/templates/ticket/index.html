@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://thymeleaf.org/"
+		xmlns:layout="htpp://utraq.net.nz/thymeleaf/layout/"
+		layout:decorator="LayoutPadrao">
+
+<th:block layout:fragment="content">
+	
+	<form th:action="@{/tickets/novo}">
+		<button class="btn btn-primary">Novo ticket</button>
+	</form>
+	
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>Codigo</th>
+				<th>Titulo</th>
+				<th>Data / Hora Criação</th>
+				<th>Ativo</th>
+				<th>Ação</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="ticket : ${listaTicket}">
+				<td th:text="${ticket.codigo}"></td>
+				<td th:text="${ticket.titulo}">Nome teste da sila</td>
+				<td th:text="${#dates.format(ticket.inicio, 'dd/MM/yyyy / HH:mm:ss')}">nscompany@email.com</td>
+				<td th:switch="${ticket.finalizado}">
+					<span th:case="${true}" class="badge badge-success" th:text="${ticket.finalizado}">ATIVO</span>
+					<span th:case="${false}" class="badge badge-danger" th:text="${ticket.finalizado}"></span>
+				</td>
+				<td>
+					<a th:href="@{/tickets/{codigo}(codigo = ${ticket.codigo})}" class="btn btn-secondary">Detalhes</a>
+					<a th:href="@{/tickets/editar/{codigo}(codigo = ${ticket.codigo})}" class="btn btn-info">Editar</a>
+					<form th:action="@{/tickets/{codigo}(codigo = ${ticket.codigo})}" th:method="delete" class="inline">
+						<button class="btn btn-danger">Delete</button>
+					</form>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+</th:block>
+</html>

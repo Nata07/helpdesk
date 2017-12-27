@@ -27,7 +27,7 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private Long codigo;
-	@Column
+	@Column(unique = true)
 	@Email(message = "Email invalido")
 	private String email;
 	@Column

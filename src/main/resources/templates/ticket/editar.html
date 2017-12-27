@@ -1,31 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html
 		xmlns:th="http://thymeleaf.org/"
 		xmlns:layout="htpp://utraq.net.nz/thymeleaf/layout/"
 		layout:decorator="LayoutPadrao">
 
 <th:block layout:fragment="content">
 	
-	<h2>Novo ticket</h2>
+	<h2>Editar ticket</h2>
 	
 	<div class="col xs-12 col-md-12 text-center">
-		<form th:action="@{/tickets/}" th:object="${ticket}" th:method="post">
-		
+		<form th:action="@{/tickets/{codigo}(codigo = ${ticket.codigo})}" th:object="${ticket}" th:method="post">
+			
+			<input type="hidden" th:field="*{codigo}" name="codigo" />
+			
 			<div class="form-group">
-				<input type="text" name="titulo" id="titulo" placeholder="Digite titulo do ticket:" class="form-control" /> 
+				<input type="text" th:field="*{titulo}" name="titulo" id="titulo" placeholder="Digite titulo do ticket:" class="form-control" /> 
 			</div>
 			
 			<div class="form-group">
-				<textarea rows="4" name="descricao" placeholder="Digite seu descricao:" class="form-control" /> 
+				<textarea rows="4" th:field="*{descricao}"  name="descricao" placeholder="Digite seu descricao:" class="form-control" /> 
 			</div>
 			
 			<div class="form-group text-left">
 				<select name="tecnico" id="" class="custom-select col-xs-4">
 					<option th:each="tecnico : ${tecnicos}"
 						th:value="${tecnico.codigo}"
-						th:text="${tecnico.nome}">
-					
+						th:text="${tecnico.nome}"
+						th:selected="${tecnico.codigo == ticket.tecnico.codigo}">
 					</option>
 				</select>
 			</div>

@@ -10,7 +10,10 @@ import br.com.adminfo.helpdesk.model.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 	
-	@Query(value = "select u.* from usuario u inner join usuario_permissao up on u.codigo = up.codigo_usuario where up.codigo_permissao = :codigo_permissao", nativeQuery = true)
-	public List<Usuario> findAllWherePermissaoEquals(@Param("codigo_permissao") Long codigo_permissao);
+	@Query(value = "select u.* from usuario u inner join usuario_permissao up on u.codigo = up.codigo_usuario where up.codigo_permissao = :codigo_permissao and u.codigo not in(:codigo_usuario)", nativeQuery = true)
+	public List<Usuario> findAllWherePermissaoEquals(@Param("codigo_permissao") Long codigo_permissao,
+													 @Param("codigo_usuario") Long codigo_usuario);
+
+	public Usuario findByEmail(String email);
 	
 }

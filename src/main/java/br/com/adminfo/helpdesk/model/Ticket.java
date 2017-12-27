@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -33,7 +34,12 @@ public class Ticket {
 	@JoinColumn(name = "codigo_usuario_tecnico")
 	private Usuario tecnico;
 	
-	private Boolean finalizado;
+	private Boolean finalizado = false;
+	
+	@PrePersist
+	public void prePersist(){
+		this.setInicio(new Date());
+	}
 
 	public Ticket() {
 		

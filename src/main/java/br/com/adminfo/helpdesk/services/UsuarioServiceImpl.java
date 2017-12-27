@@ -57,8 +57,8 @@ public class UsuarioServiceImpl implements UsuarioService{
 	}
 	
 	@Override
-	public List<Usuario> findAllWherePermissaoEquals(Long codigo_permissao) {
-		return this.repository.findAllWherePermissaoEquals(codigo_permissao);
+	public List<Usuario> findAllWherePermissaoEquals(Long codigo_permissao, Long codigo_usuario) {
+		return this.repository.findAllWherePermissaoEquals(codigo_permissao, codigo_usuario);
 	}
 
 	@Override

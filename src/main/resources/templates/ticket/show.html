@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://thymeleaf.org/"
+		xmlns:layout="htpp://utraq.net.nz/thymeleaf/layout/"
+		layout:decorator="LayoutPadrao">
+
+<th:block layout:fragment="content">
+	
+	<div class="col-xs-12 col-md-12">
+		<div class="card">
+			<div class="card-header">
+				<span th:text="${ticket.titulo}"></span>			
+			</div>
+			<div class="card-block">
+				<ul class="inline">
+					<li>
+						Titulo: 
+						<span th:text="${ticket.titulo}"></span>
+					</li>
+					<li>
+						Descrição: 
+						<span th:text="${ticket.descricao}"></span>
+					</li>
+					<li>
+						Data criação:
+						<span th:text="${ticket.inicio}"></span>
+					</li>
+					<li>
+						Criado por: 
+						<span th:text="${ticket.usuario.nome}"></span>
+					</li>
+					<li>
+						Tecnico: 
+						<span th:text="${ticket.tecnico.nome}"></span>
+					</li>
+					<li>
+						Finalizado: 
+						<div class="inline" th:switch="${ticket.finalizado}">
+							<span class="badge badge-success" th:case="${true}" th:text="${ticket.finalizado}"></span>
+							<span class="badge badge-danger" th:case="${false}" th:text="${ticket.finalizado}"></span>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<form th:action="@{/tickets/}" th:object="${ticket}" th:method="post"></form>
+		
+		<a href="/tickets" class="btn btn-secondary">Voltar</a>
+	</div>
+
+</th:block>
+</html>
