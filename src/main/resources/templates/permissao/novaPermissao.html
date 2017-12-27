@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://thymeleaf.org/"
+		xmlns:layout="htpp://utraq.net.nz/thymeleaf/layout/"
+		layout:decorator="LayoutPadrao">
+
+<th:block layout:fragment="content">
+	<div class="col xs-12 col-md-12 text-center">
+		
+		<form th:action="@{/permissao/}" th:object="${permissao}"
+			th:method="post">
+			<div class="form-group">
+				<p th:text="${fields}"></p>
+				<input type="text" th:field="*{nome}" name="nome" 
+					placeholder="Digite uma permissao:" class="form-control" /> 
+				<span class="text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">	Permissao obrigatória!</span>
+			</div>
+
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary">Salvar</button>
+			</div>
+
+		</form>
+	</div>
+
+</th:block>
+</html>

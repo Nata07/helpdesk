@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://thymeleaf.org/"
+		xmlns:layout="htpp://utraq.net.nz/thymeleaf/layout/"
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-primary">
+	<button type="button" class="navbar-toggler navbar-toggler-right" data-toggle="collapse" data-target="navbar">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<a href="" class="navbar-brand">Helpdesk</a>
+	
+	<div class="collapse navbar-collapse" id="navbar" >
+		<ul class="navbar-nav mr-auto" sec:authorize="isAuthenticated()" >
+			<li class="nav-item">
+				<a href="/usuarios" class="nav-link">Users</a>
+			</li>
+			<li class="nav-item">
+				<a href="/permissao" class="nav-link">Permissao</a>
+			</li>
+		</ul>
+		
+		<ul class="navbar-nav ml-auto" sec:authorize="isAuthenticated()">
+			<li class="nav-item">
+				<a href="/logout" class="nav-link">Logout</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+
+</html>

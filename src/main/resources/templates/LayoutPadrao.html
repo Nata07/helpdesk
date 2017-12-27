@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://thymeleaf.org/"
+		xmlns:layout="htpp://utraq.net.nz/thymeleaf/layout/"
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" th:href="@{/css/vendors/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<title>Help-Desk</title>
+</head>
+<body>
+	
+	<div sec:authenticated="isAuthenticated()">
+		<th:block layout:replace="/fragments/header"></th:block>
+		<th:block layout:replace="/fragments/menu"></th:block>
+		
+	</div>
+	
+	<div class="container">
+		<div class="row">
+			<th:block layout:fragment="content"></th:block>
+		</div>
+	</div>
+
+<script th:src="@{/javascript/vendors/jquery-3.1.1.min.js}"></script>
+<script th:src="@{/javascript/vendors/bootstrap.min.js}"></script>
+
+</body>
+</html>

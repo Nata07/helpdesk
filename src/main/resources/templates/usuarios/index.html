@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://thymeleaf.org/"
+		xmlns:layout="htpp://utraq.net.nz/thymeleaf/layout/"
+		layout:decorator="LayoutPadrao">
+
+<th:block layout:fragment="content">
+	
+	<form th:action="@{/usuarios/novo}">
+		<button class="btn btn-primary">Novo usuário</button>
+	</form>
+	
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>Codigo</th>
+				<th>Nome</th>
+				<th>Email</th>
+				<th>Ativo</th>
+				<th>Ação</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="usuario : ${listaUsuarios}">
+				<td th:text="${usuario.codigo}"></td>
+				<td th:text="${usuario.nome}">Nome teste da sila</td>
+				<td th:text="${usuario.email}">nscompany@email.com</td>
+				<td th:switch="${usuario.ativo}">
+					<span th:case="${true}" class="badge badge-success" th:text="${usuario.ativo}">ATIVO</span>
+					<span th:case="${false}" class="badge badge-danger" th:text="${usuario.ativo}"></span>
+				</td>
+				<td>
+					<a th:href="@{/usuarios/editar/{codigo}(codigo = ${usuario.codigo})}" class="btn btn-info">Editar</a>
+					<form th:action="@{/usuarios/{codigo}(codigo = ${usuario.codigo})}" th:method="delete" class="inline">
+						<button class="btn btn-danger">Delete</button>
+					</form>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+</th:block>
+</html>

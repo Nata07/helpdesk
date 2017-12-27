@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://thymeleaf.org/"
+		xmlns:layout="htpp://utraq.net.nz/thymeleaf/layout/"
+		layout:decorator="LayoutPadrao">
+
+<th:block layout:fragment="content">
+	
+	<div class="row">
+		<div class="col-xs-12 text-right">
+			<form th:action="@{/usuarios}">
+				<button class="btn btn-primary">Lista usuários</button>
+			</form>
+		</div>
+	</div>
+	
+	<div class="col-xs-12 col-md-12 text-center">
+		<form th:action="@{/usuarios/{codigo}(codigo = ${usuario.codigo})}" th:object="${usuario}"	th:method="put">
+			
+			<input type="hidden" th:field="*{codigo}" />
+			
+			<div class="form-group">
+				<input type="text" th:field="*{nome}" name="nome" placeholder="Digite seu usuario:" class="form-control" /> 
+			</div>
+			
+			<div class="form-group">
+				<input type="email" th:field="*{email}" name="email" placeholder="Digite seu email:" class="form-control" /> 
+			</div>
+			
+			<div class="form-group">
+				<input type="password" th:field="*{senha}" name="senha" placeholder="Digite uma senha:" class="form-control" /> 
+			</div>
+			
+			<div class="form-group text-left">
+				<select th:field="*{permissao}" class="custom-select col-xs-4">
+					<option th:each="permissao : ${permissoes}"
+						th:value="${permissao.codigo}"
+						th:text="${permissao.nome}"
+						th:selected="${permissao.codigo == usuario.permissao[0].codigo}">
+					
+					</option>
+				</select>
+			</div>
+			
+			<div class="form-group text-left">
+				<label class="custom-control custom-checkbox">
+					<input type="checkbox" th:field="*{ativo}" class="custom-control-input" />
+					<span class="custom-control-indicator"></span>
+					<span class="custom-control-description">Ativo</span>
+				</label>
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary">Salvar</button>
+			</div>
+
+		</form>
+	</div>
+
+</th:block>
+</html>
