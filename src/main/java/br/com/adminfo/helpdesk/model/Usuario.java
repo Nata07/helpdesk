@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -51,10 +50,11 @@ public class Usuario {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="tecnico")
 	private Set<Ticket> ticketTecinico;
 	
-	
-	public Usuario() {
-		
-	}
+	@Column
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario_interacao")
+	private Set<Interacao> interacao;
+
+	public Usuario() {}
 
 	public Usuario(Long codigo, String email, String nome, String senha, boolean ativo) {
 		this.codigo = codigo;
@@ -120,4 +120,11 @@ public class Usuario {
 		this.permissao = permissoes;
 	}
 	
+	public Set<Interacao> getInteracao() {
+		return interacao;
+	}
+
+	public void setInteracao(Set<Interacao> interacao) {
+		this.interacao = interacao;
+	}
 }

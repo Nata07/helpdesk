@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 		xmlns:th="http://thymeleaf.org/"
 		xmlns:layout="htpp://utraq.net.nz/thymeleaf/layout/"
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
 		layout:decorator="LayoutPadrao">
 
 <th:block layout:fragment="content">
@@ -44,9 +45,41 @@
 				</ul>
 			</div>
 		</div>
-		<form th:action="@{/tickets/}" th:object="${ticket}" th:method="post"></form>
 		
 		<a href="/tickets" class="btn btn-secondary">Voltar</a>
+	</div>
+	<div class="col-xs-12 col-md-12">
+		<hr />
+		<h2>Interacao</h2>
+		<form th:action="@{/tickets/{codigo_ticket}/interacoes(codigo_ticket = ${ticket.codigo})}" th:object="${interacao}" th:method="post">
+			<div class="form-group">
+				<input type="text" disabled="disabled" th:value="${#authentication.name}" class="form-control" />
+			</div>
+			<div class="form-group">
+				<textarea th:field="*{texto}" placeholder="Digite seu texto" rows="4" class="form-control"></textarea>
+			</div>
+			
+			<div class="form-group">
+				<button type="submit" class="btn btn-success">Salvar</button>
+			</div>
+		</form>
+	</div>
+	
+	<div class="col-xs-12 col-md-12">
+		<hr />
+		<h2>Lista de interações</h2>
+		<hr />
+	</div>
+	<div class="col-xs-12 col-md-12" th:each="interact : ${interacoes}">
+		<div class="col-xs-10 col-md-10">
+			<strong th:text="${interact.usuario_interacao.email} + ' coments: ' "></strong>
+			<p th:text="${interact.texto}"></p>
+		</div>
+		<div class="col-xs-2 col-md-2">
+			<form th:action="@{/tickets/{codigo_ticket}/interacoes/{codigo}(codigo_ticket = ${ticket.codigo}, codigo = ${interact.codigo})}" th:method="delete">
+				<button type="submit" class="btn btn-danger">Deletar</button>
+			</form>
+		</div>
 	</div>
 
 </th:block>

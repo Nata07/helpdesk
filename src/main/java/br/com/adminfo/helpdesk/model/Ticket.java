@@ -1,13 +1,17 @@
 package br.com.adminfo.helpdesk.model;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
@@ -35,6 +39,10 @@ public class Ticket {
 	private Usuario tecnico;
 	
 	private Boolean finalizado = false;
+	
+	@Column
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "ticket")
+	private List<Interacao> interacoes;
 	
 	@PrePersist
 	public void prePersist(){
@@ -108,4 +116,14 @@ public class Ticket {
 	public void setFinalizado(Boolean finalizado) {
 		this.finalizado = finalizado;
 	}
+
+	public List<Interacao> getInteracoes() {
+		return interacoes;
+	}
+
+	public void setInteracoes(List<Interacao> interacoes) {
+		this.interacoes = interacoes;
+	}
+	
+	
 }

@@ -1,5 +1,7 @@
 package br.com.adminfo.helpdesk.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.com.adminfo.helpdesk.model.Interacao;
 import br.com.adminfo.helpdesk.model.Ticket;
 
 import br.com.adminfo.helpdesk.services.TicketService;
@@ -81,7 +84,12 @@ public class TicketController {
 	
 	@GetMapping("{codigo}")
 	public String show(@PathVariable("codigo") Long codigo, Model model){
-		model.addAttribute("ticket", this.ticketService.show(codigo));
+		Ticket ticket = this.ticketService.show(codigo);
+		List<Interacao> interacoes = ticket.getInteracoes();
+		
+		model.addAttribute("ticket", ticket);
+		model.addAttribute("interacao", new Interacao());
+		model.addAttribute("interacoes", interacoes);
 		return "ticket/show";
 	}
 	
