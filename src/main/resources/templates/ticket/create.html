@@ -7,33 +7,43 @@
 
 <th:block layout:fragment="content">
 	
-	<h2>Novo ticket</h2>
+	
 	
 	<div class="col xs-12 col-md-12 text-center">
-		<form th:action="@{/tickets/}" th:object="${ticket}" th:method="post">
+		<div class="card">
+			<div class="card-header">
+				<h2>Novo ticket</h2>			
+			</div>
+			<div class="card-block">
+				<form th:action="@{/tickets/}" th:object="${ticket}" th:method="post">
 		
-			<div class="form-group">
-				<input type="text" name="titulo" id="titulo" placeholder="Digite titulo do ticket:" class="form-control" /> 
-			</div>
-			
-			<div class="form-group">
-				<textarea rows="4" name="descricao" placeholder="Digite seu descricao:" class="form-control" /> 
-			</div>
-			
-			<div class="form-group text-left">
-				<select name="tecnico" id="" class="custom-select col-xs-4">
-					<option th:each="tecnico : ${tecnicos}"
-						th:value="${tecnico.codigo}"
-						th:text="${tecnico.nome}">
+					<div class="form-group">
+						<input type="text" name="titulo" id="titulo" placeholder="Digite titulo do ticket:" class="form-control" /> 
+					</div>
 					
-					</option>
-				</select>
+					<div class="form-group">
+						<textarea rows="4" name="descricao" placeholder="Digite seu descricao:" class="form-control" /> 
+					</div>
+					
+					<div class="form-group text-left">
+						<select name="tecnico" id="" class="custom-select col-xs-4">
+							<option th:each="tecnico : ${tecnicos}"
+								th:value="${tecnico.codigo}"
+								th:text="${tecnico.nome}">
+							
+							</option>
+						</select>
+					</div>
+					
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary">Salvar</button>
+						<a href="/tickets" class="btn btn-secondary">Voltar</a>
+					</div>
+				</form>
+									
 			</div>
-			
-			<div class="form-group">
-				<button type="submit" class="btn btn-primary">Salvar</button>
-			</div>
-		</form>
+		</div>
+		
 	</div>
 
 </th:block>

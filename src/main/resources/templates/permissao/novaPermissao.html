@@ -7,21 +7,28 @@
 
 <th:block layout:fragment="content">
 	<div class="col xs-12 col-md-12 text-center">
+		<div class="card">
+			<div class="card-header"> 
+				<h2>Cadastro de Permissao</h2>
+			</div>
+			<div class="card-block">
+				<form th:action="@{/permissao/}" th:object="${permissao}" th:method="post">
+					<div class="form-group">
+						<p th:text="${fields}"></p>
+						<input type="text" th:field="*{nome}" name="nome" 
+							placeholder="Digite uma permissao:" class="form-control" /> 
+						<span class="text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">	Permissao obrigatória!</span>
+					</div>
 		
-		<form th:action="@{/permissao/}" th:object="${permissao}"
-			th:method="post">
-			<div class="form-group">
-				<p th:text="${fields}"></p>
-				<input type="text" th:field="*{nome}" name="nome" 
-					placeholder="Digite uma permissao:" class="form-control" /> 
-				<span class="text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">	Permissao obrigatória!</span>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary">Salvar</button>
+						<a href="/permissao" class="btn btn-secondary">Voltar</a>
+					</div>
+		
+				</form>
 			</div>
-
-			<div class="form-group">
-				<button type="submit" class="btn btn-primary">Salvar</button>
-			</div>
-
-		</form>
+		</div>
+		
 	</div>
 
 </th:block>

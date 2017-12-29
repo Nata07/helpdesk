@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html
 		xmlns:th="http://thymeleaf.org/"
 		xmlns:layout="htpp://utraq.net.nz/thymeleaf/layout/"
 		layout:decorator="LayoutPadrao">
@@ -9,7 +9,7 @@
 	
 	<div class="col xs-12 col-md-12 text-center">
 		<h1>Cadastro de usuario</h1> 
-		<form th:action="@{/usuario/}" th:object="${usuario}"	th:method="post">
+		<form th:action="@{/usuario/}" th:object="${usuario}" th:method="post">
 		
 			<div class="form-group">
 				<input type="text" th:field="*{nome}" name="nome" placeholder="Digite seu usuario:" class="form-control" /> 

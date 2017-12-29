@@ -12,4 +12,5 @@ public interface UsuarioService {
 	public Boolean editar(Long codigo, Usuario usuario);
 	public Usuario show(Long codigo);
 	public List<Usuario> findAllWherePermissaoEquals(Long codigo_permissao, Long codigo_usuario);
+	public Usuario findCurrentUser();
 }

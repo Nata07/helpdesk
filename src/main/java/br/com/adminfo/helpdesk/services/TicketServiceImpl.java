@@ -85,7 +85,7 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public Ticket show(Long codigo) {
-		return this.repository.findOne(codigo);
+		return findByCodigo(codigo);
 	}
 
 	public Model findAllTecnicos(Model model) {
