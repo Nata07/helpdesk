@@ -66,8 +66,12 @@ public class TicketController {
 	
 	@GetMapping("/editar/{codigo}")
 	public String editar(@PathVariable("codigo") Long codigo, Model model){
+		Ticket ticket = this.ticketService.show(codigo);
+		List<Interacao> interacoes = ticket.getInteracoes();
 		model = this.ticketService.findAllTecnicos(model);
 		model.addAttribute("ticket", this.ticketService.show(codigo));
+		model.addAttribute("interaction_count", interacoes.size());
+		model.addAttribute("usuarioLogado", this.usuarioSevice.findCurrentUser());
 		return "ticket/editar";
 	}
 	
@@ -90,6 +94,7 @@ public class TicketController {
 		model.addAttribute("ticket", ticket);
 		model.addAttribute("interacao", new Interacao());
 		model.addAttribute("interacoes", interacoes);
+		model.addAttribute("usuarioLogado", this.usuarioSevice.findCurrentUser());
 		return "ticket/show";
 	}
 	

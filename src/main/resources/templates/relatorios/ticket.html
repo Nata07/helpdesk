@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://thymeleaf.org/"
+		xmlns:layout="htpp://utraq.net.nz/thymeleaf/layout/"
+		layout:decorator="LayoutPadrao">
+
+<th:block layout:fragment="content">
+
+	<div class="col xs-12 col-md-12 text-center">
+		<div class="card">
+			<div class="card-header">
+				<h2>Novo ticket</h2>			
+			</div>
+			<div class="card-block">
+				<form th:action="@{/relatorios/tickets}" th:method="get">
+					
+					<div class="form-group text-left">
+						<select name="day" class="custom-select">
+							<option value="7" >7 dias</option>
+							<option value="10" >10 dias</option>
+							<option value="15" >15 dias</option>
+						</select>
+					</div>
+					
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary">Gerar</button>
+					</div>
+				</form>						
+			</div>
+		</div>
+	</div>
+
+	<div class="col xs-12 col-md-12 text-center">
+		<div class="card">
+			<div class="card-header">
+				<h2>Relatorios</h2>
+			</div>
+			<div class="card-block">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Codigo</th>
+							<th>Titulo</th>
+							<th>Data / Hora Criação</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="ticket : ${listaTicket}">
+							<td th:text="${ticket.codigo}"></td>
+							<td th:text="${ticket.titulo}">Nome teste da sila</td>
+							<td th:text="${#dates.format(ticket.inicio, 'dd/MM/yyyy / HH:mm:ss')}">nscompany@email.com</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+
+</th:block>
+</html>

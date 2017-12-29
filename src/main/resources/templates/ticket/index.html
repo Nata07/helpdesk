@@ -30,14 +30,23 @@
 					<span th:case="${true}" class="badge badge-success" th:text="${ticket.finalizado}">ATIVO</span>
 					<span th:case="${false}" class="badge badge-danger" th:text="${ticket.finalizado}"></span>
 				</td>
-				<td >
-					<a th:href="@{/tickets/{codigo}(codigo = ${ticket.codigo})}" class="btn btn-secondary">Detalhes</a>
-					<a th:href="@{/tickets/editar/{codigo}(codigo = ${ticket.codigo})}" class="btn btn-info">Editar</a>
-					<form th:if="usuarioLogado.codigo == ticket.usuario.codigo"  th:method="delete" class="inline"
-								th:action="@{/tickets/{codigo}(codigo = ${ticket.codigo})}">
-						<button class="btn btn-danger">Delete</button>
-					</form>
-				</td>
+				<div th:switch="${usuarioLogado.permissao[0].nome}">
+					<td th:case="ADMIN">
+						<a th:href="@{/tickets/{codigo}(codigo = ${ticket.codigo})}" class="btn btn-secondary">Detalhes</a>
+						<a th:href="@{/tickets/editar/{codigo}(codigo = ${ticket.codigo})}" class="btn btn-info">Editar</a>
+						<form  th:method="delete" class="inline" th:action="@{/tickets/{codigo}(codigo = ${ticket.codigo})}">
+							<button class="btn btn-danger">Delete</button>
+						</form>
+					</td>
+					<td th:case="USUARIO">
+						<a th:href="@{/tickets/{codigo}(codigo = ${ticket.codigo})}" class="btn btn-secondary">Detalhes</a>
+						<a th:if="${usuarioLogado.codigo == ticket.usuario.codigo}" th:href="@{/tickets/editar/{codigo}(codigo = ${ticket.codigo})}" class="btn btn-info">Editar</a>
+						<form th:if="${usuarioLogado.codigo == ticket.usuario.codigo}"  th:method="delete" class="inline"
+									th:action="@{/tickets/{codigo}(codigo = ${ticket.codigo})}">
+							<button class="btn btn-danger">Delete</button>
+						</form>
+					</td>
+				</div>
 			</tr>
 		</tbody>
 	</table>

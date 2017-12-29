@@ -31,9 +31,21 @@
 					</option>
 				</select>
 			</div>
+			<div class="form-group text-left" th:if="${interaction_count > 0}">
+				<label class="custom-control custom-checkbox" th:if="${usuarioLogado.codigo == ticket.usuario.codigo or usuarioLogado.permissao[0].nome == 'ADMIN'}">
+					<input type="checkbox" class="custom-control-input" th:checked="${ticket.finalizado}"  />
+					<span class="custom-control-indicator"></span>
+					<span class="custom-control-description">FINALIZADO?</span>
+				</label>
+			</div>
+			<div class="form-group" th:if="${interaction_count == 0}">
+				<p>Não ha interações nesse ticket. Impossivel finaliza-la! </p>
+			</div>
 			
 			<div class="form-group">
-				<button type="submit" class="btn btn-primary">Salvar</button>
+				<button type="submit" class="btn btn-primary"
+					th:if="${usuarioLogado.codigo == ticket.usuario.codigo or usuarioLogado.permissao[0].nome == 'ADMIN'}" >Salvar
+				</button>
 			</div>
 		</form>
 	</div>

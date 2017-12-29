@@ -75,8 +75,12 @@
 			<strong th:text="${interact.usuario_interacao.email} + ' coments: ' "></strong>
 			<p th:text="${interact.texto}"></p>
 		</div>
-		<div class="col-xs-2 col-md-2">
-			<form th:action="@{/tickets/{codigo_ticket}/interacoes/{codigo}(codigo_ticket = ${ticket.codigo}, codigo = ${interact.codigo})}" th:method="delete">
+		<div class="col-xs-2 col-md-2" th:switch="${usuarioLogado.permissao[0].nome}">
+			<form th:case="ADMIN" th:action="@{/tickets/{codigo_ticket}/interacoes/{codigo}(codigo_ticket = ${ticket.codigo}, codigo = ${interact.codigo})}" th:method="delete">
+				<button type="submit" class="btn btn-danger">Deletar</button>
+			</form>
+			<form th:case="USUARIO" th:if="${usuarioLogado.codigo == ticket.usuario.codigo}" 
+					th:action="@{/tickets/{codigo_ticket}/interacoes/{codigo}(codigo_ticket = ${ticket.codigo}, codigo = ${interact.codigo})}" th:method="delete">
 				<button type="submit" class="btn btn-danger">Deletar</button>
 			</form>
 		</div>
